@@ -1,41 +1,41 @@
 #include<iostream>
 #include"Folder.h"
 
-Folder::Folder(std::string folderName, Node* parentNode): Node(folderName,parentNode) {
+Folder::Folder(std::string folderName, Node* parentNode) : Node(folderName, parentNode) {
 	maxCapacity = 50;
 	childCount = 0;
-	childeren = new Node * [100]; // max 100 nodes (files or folders) inside a folder
+	children = new Node * [100]; // max 100 nodes (files or folders) inside a folder
 }
 
 
 void Folder::addNode(Node* ptr) { // used when Mkdir/touch
-	childeren[childCount] = ptr;
+	children[childCount] = ptr;
 	childCount++;
 }
 
 void Folder::open() { // used when ls
-	for (int i = 0; i < childCount;i++) {
-		std::cout << childeren[i]->getName() << std::endl;
+	for (int i = 0; i < childCount; i++) {
+		std::cout << children[i]->getName() << std::endl;
 	}
 }
 
 void Folder::deleteNode() { // used when rm
 	for (int i = 0; i < childCount; i++) {
-		delete childeren[i];
+		delete children[i];
 	}
 }
 
-Folder :: ~Folder(){
+Folder :: ~Folder() {
 	deleteNode();
-	delete[] childeren;
+	delete[] children;
 }
 
 
 void Folder::renameNode(std::string oldName, std::string newName) {
 	bool found = false;
 	for (int i = 0; i < childCount; i++) {
-		if (oldName == childeren[i]->getName()) {
-			childeren[i]->setName(newName);
+		if (oldName == children[i]->getName()) {
+			children[i]->setName(newName);
 			found = true;
 			break;
 		}
@@ -51,8 +51,8 @@ void Folder::renameNode(std::string oldName, std::string newName) {
 Node* Folder::findChild(std::string target) {
 
 	for (int i = 0; i < childCount; i++) {
-		if (target == childeren[i]->getName()) {
-			return childeren[i];
+		if (target == children[i]->getName()) {
+			return children[i];
 		}
 	}
 
