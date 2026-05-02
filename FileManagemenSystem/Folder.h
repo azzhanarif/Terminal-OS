@@ -2,10 +2,10 @@
 #include"Node.h"
 #include<string>
 
-class Folder: public Node {
+class Folder : public Node {
 protected:
 
-	Node** childeren;
+	Node** children;
 	int childCount;
 	int maxCapacity;
 
