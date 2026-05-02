@@ -3,10 +3,12 @@
 #include"Node.h"
 #include"Folder.h"
 #include"text.h"
+#include"mp3.h"
+#include "privateFile.h"
 
 Commands::Commands() {
-    rootFolder = new Folder("root", nullptr);
-    currentFolder = rootFolder;
+	rootFolder = new Folder("root", nullptr);
+	currentFolder = rootFolder;
 }
 void Commands::executeMkdir(std::string dirName) {
 	Node* newFolder = new Folder(dirName, currentFolder);
@@ -96,7 +98,7 @@ void Commands::executeNew(std::string textName) {
 }
 
 void Commands::executeRename(std::string oldName, std::string newName) {
-	currentFolder->renameNode(oldName,newName);
+	currentFolder->renameNode(oldName, newName);
 }
 
 void Commands::executeLs() {
@@ -104,7 +106,7 @@ void Commands::executeLs() {
 }
 
 void Commands::executeCd(std::string NodeName) {
-	
+
 	// root> cd folder will bring user inside folder which means the only chang will be currentFolder
 	if (NodeName == "..") {
 		currentFolder = rootFolder;
