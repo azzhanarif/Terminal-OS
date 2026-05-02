@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="FileManagemenSystem/FileManagemenSystem.vcxproj" />
+  <Project Path="FileManagemenSystem/FileManagemenSystem.vcxproj" Id="0533d25a-1113-4436-9ee4-0bd174f962d8" />
 </Solution>

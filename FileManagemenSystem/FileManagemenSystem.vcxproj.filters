@@ -33,6 +33,12 @@
     <ClCompile Include="text.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Mp3.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Priv.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h">
@@ -45,6 +51,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="text.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Mp3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Priv.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

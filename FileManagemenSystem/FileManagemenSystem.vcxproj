@@ -130,13 +130,17 @@
     <ClCompile Include="commandManager.cpp" />
     <ClCompile Include="Folder.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mp3.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Priv.cpp" />
     <ClCompile Include="text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandManager.h" />
     <ClInclude Include="Folder.h" />
+    <ClInclude Include="Mp3.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Priv.h" />
     <ClInclude Include="text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

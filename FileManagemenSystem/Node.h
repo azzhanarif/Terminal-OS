@@ -16,4 +16,5 @@ public:
 	void setName(std::string newName);
 	virtual bool isFolder() = 0;
 	virtual ~Node();
+
 };

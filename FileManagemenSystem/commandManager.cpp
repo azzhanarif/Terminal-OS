@@ -13,10 +13,86 @@ void Commands::executeMkdir(std::string dirName) {
 	currentFolder->addNode(newFolder);
 }
 
-void Commands::executeTouch(std::string textName) {
+void Commands::executeNew(std::string textName) {
 
-	Node* newFile = new textFile(textName, currentFolder);
-	currentFolder->addNode(newFile);
+	std::cout << "Which type of file do you Want to create: \n"
+		<< "(1) Text File\n"
+		<< "(2) Zip File\n"
+		<< "(3) Private File\n"
+		<< "(4) Mp3 File\n";
+
+	int choice;
+	while(true){
+		std::cout << "Enter Your choice: ";
+		std::cin >> choice;
+		if (choice <= 0 || choice >= 5) {
+			std::cout << "Invalid choice!\n Enter Again: ";
+		}
+		else {
+			if (choice == 1) {
+
+				std:: cout << "Enter the name of the text file: ";
+				std::string name;
+				std::getline(std::cin, name);
+
+				std::cout << "Creating text file...\n";
+
+				Node* newText = new textFile(name,currentFolder);
+				currentFolder->addNode(newText);
+
+				break;
+			}
+			else if (choice == 2) {
+				std::cout << "Creating Zip file...\n";
+
+
+
+
+
+
+
+
+
+
+
+				break;
+			}
+			else if (choice == 3) {
+				std::cout << "Creating Private file...\n";
+
+
+
+
+
+
+
+
+
+
+
+
+
+				break;
+			}
+			else if (choice == 4) {
+				std::cout << "Creating Zip file...\n";
+
+
+
+
+
+
+
+
+
+
+
+				break;
+			}
+
+		}
+	}
+
 }
 
 void Commands::executeRename(std::string oldName, std::string newName) {
@@ -39,16 +115,20 @@ void Commands::executeCd(std::string NodeName) {
 	if (target != nullptr) {
 
 		if (target->isFolder()) {
-			currentFolder = (Folder*)currentFolder->findChild(NodeName);
+			currentFolder = (Folder*)currentFolder->findChild(NodeName); // for cd folder
 		}
 		else {
-			std:: cout << "There is no directory names as " << NodeName << " Instead its a file " << std::endl;
+			target->open(); // for cd any type of file
 		}
 
 	}
 	else {
-		std :: cout << "Error: " << NodeName << " directory not found!" << std :: endl;
+		std :: cout << "Error: " << NodeName << " Node not found!" << std :: endl;
 	}
+}
 
+void Commands::executeRm(std::string name) {
 
+	Node* target = currentFolder->findChild(name);
+	target->deleteNode();
 }

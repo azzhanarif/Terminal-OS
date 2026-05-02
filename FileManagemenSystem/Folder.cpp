@@ -23,6 +23,7 @@ void Folder::deleteNode() { // used when rm
 	for (int i = 0; i < childCount; i++) {
 		delete childeren[i];
 	}
+	delete[] this;
 }
 
 Folder :: ~Folder(){
