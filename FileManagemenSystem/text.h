@@ -1,7 +1,7 @@
 #pragma once
 #include"Node.h"
 
-class textFile : public Node{
+class textFile : public Node {
 private:
 
 	std::string* lines;

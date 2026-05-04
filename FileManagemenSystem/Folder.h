@@ -17,6 +17,7 @@ public:
 	void open() override;
 	Node* findChild(std::string target);
 	bool isFolder() override;
+	virtual void removeChild(Node* childToRemove) override;
 	~Folder() override;
 	void deleteNode() override;
 

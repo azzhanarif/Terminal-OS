@@ -36,7 +36,7 @@
     <ClCompile Include="Mp3.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Priv.cpp">
+    <ClCompile Include="privateFile.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClInclude Include="Mp3.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Priv.h">
+    <ClInclude Include="privateFile.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -46,53 +46,27 @@ void Commands::executeNew(std::string textName) {
 			}
 			else if (choice == 2) {
 				std::cout << "Creating Zip file...\n";
-
-
-
-
-
-
-
-
-
-
-
+				// UNDER CONSTRUCTION
 				break;
 			}
 			else if (choice == 3) {
 				std::cout << "Creating Private file...\n";
-
-
-
-
-
-
-
-
-
-
-
-
-
+				// UNDR CONSTRUCTION
 				break;
 			}
 			else if (choice == 4) {
-				std::cout << "Creating Zip file...\n";
 
-
-
-
-
-
-
-
-
-
-
+				std::cout << "Creating Mp3 file...\n";
+				std::string name;
+				std::cout << "Enter the name of the audio file you want to create:  " << std::endl;
+				Node* mp3File = new audioFile(name, currentFolder);
+				currentFolder->addNode(mp3File);
 				break;
+
 			}
 
 		}
+
 	}
 
 }

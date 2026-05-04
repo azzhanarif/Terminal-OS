@@ -99,7 +99,17 @@ void textFile::open() {
 
 void textFile::deleteNode() {
 
-	delete this; // jisny bulaya wohee delete hoga
+	std::cout << "Are you sure You want to delete? ('y' for yes , 'n' for no\n";
+	char confirm;
+	std::cin >> confirm;
+	if (confirm == 'Y' || confirm == 'y') {
+
+		parent->removeChild(this);
+		delete this;
+	}
+	else {
+		std::cout << "Deletion cencelled";
+	}
 }
 
 textFile::~textFile() {

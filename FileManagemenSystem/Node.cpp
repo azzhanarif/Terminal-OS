@@ -6,11 +6,6 @@ Node::Node(std::string nodeName = "New Item", Node* parentNode = nullptr)  {
     parent = parentNode;
 }
 
-Node::Node() {
-    name = "NULL";
-    parent = nullptr;
-}
-
 std::string Node::getName() {
     return name;
 }

@@ -132,7 +132,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mp3.cpp" />
     <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Priv.cpp" />
+    <ClCompile Include="privateFile.cpp" />
     <ClCompile Include="text.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +140,7 @@
     <ClInclude Include="Folder.h" />
     <ClInclude Include="Mp3.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="Priv.h" />
+    <ClInclude Include="privateFile.h" />
     <ClInclude Include="text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

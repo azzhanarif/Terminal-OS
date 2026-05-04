@@ -8,7 +8,6 @@ protected:
 public:
 
 	Node(std::string n, Node* parentNode);
-	Node();
 	std::string getName();
 
 	virtual void open() = 0;
@@ -16,5 +15,6 @@ public:
 	void setName(std::string newName);
 	virtual bool isFolder() = 0;
 	virtual ~Node();
+	virtual void removeChild(Node* childToRemove);
 
 };

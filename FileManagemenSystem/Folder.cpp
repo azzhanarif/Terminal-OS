@@ -8,7 +8,7 @@ Folder::Folder(std::string folderName, Node* parentNode) : Node(folderName, pare
 }
 
 
-void Folder::addNode(Node* ptr) { // used when Mkdir/touch
+void Folder::addNode(Node* ptr) { // used when Mkdir/new
 	children[childCount] = ptr;
 	childCount++;
 }
@@ -24,6 +24,22 @@ void Folder::deleteNode() { // used when rm
 		delete children[i];
 	}
 	delete[] this;
+}
+
+void Folder :: removeChild(Node* childToRemove) {
+	for (int i = 0; i < childCount;i++) {
+		if (children[i] == childToRemove) {
+
+			for (int j = i; j < childCount - 1; j++)
+			{
+				children[j] = children[j + 1];
+			}
+
+			children[childCount - 1] = nullptr;
+			childCount--;
+			break;
+		}
+	}
 }
 
 Folder :: ~Folder() {
