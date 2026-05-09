@@ -79,9 +79,8 @@ void privateFile::deleteNode()
 
     if (confirm == "yes"||"Yes")
     {
-        delete[] lines;
-        lines = nullptr;
-        std::cout << name << " deleted.\n";
+        parent->removeChild(this); // edited by Azhan later
+        delete this;
     }
     else {
         std::cout << "Deletion cancelled.\n";

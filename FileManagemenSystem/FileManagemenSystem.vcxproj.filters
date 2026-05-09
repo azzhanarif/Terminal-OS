@@ -39,6 +39,9 @@
     <ClCompile Include="privateFile.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="ZipFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h">
@@ -57,6 +60,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="privateFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ZipFile.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

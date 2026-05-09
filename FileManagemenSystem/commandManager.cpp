@@ -5,6 +5,8 @@
 #include"text.h"
 #include"mp3.h"
 #include "privateFile.h"
+#include "ZipFile.h"
+#include<sstream>
 
 Commands::Commands() {
 	rootFolder = new Folder("root", nullptr);
@@ -15,7 +17,7 @@ void Commands::executeMkdir(std::string dirName) {
 	currentFolder->addNode(newFolder);
 }
 
-void Commands::executeNew(std::string textName) {
+void Commands::executeNew() {
 
 	std::cout << "Which type of file do you Want to create: \n"
 		<< "(1) Text File\n"
@@ -39,19 +41,37 @@ void Commands::executeNew(std::string textName) {
 
 				std::cout << "Creating text file...\n";
 
-				Node* newText = new textFile(name,currentFolder);
+				Node* newText = new textFile(name + ".txt", currentFolder);
 				currentFolder->addNode(newText);
 
 				break;
 			}
 			else if (choice == 2) {
 				std::cout << "Creating Zip file...\n";
-				// UNDER CONSTRUCTION
+				std::string word;
+
+				std::cout << "Enter the name of the zip file you want to make: ";
+				getline(std::cin, word);
+
+				Node* tempZip = new ZipFile(word + ".zip", currentFolder);
+				currentFolder->addNode(tempZip);
+
 				break;
 			}
 			else if (choice == 3) {
 				std::cout << "Creating Private file...\n";
-				// UNDR CONSTRUCTION
+
+				std::string name;
+				std::string password;
+
+				std::cout << "Enter the name of file you want to create: ";
+				getline(std::cin, name);
+				std::cout << "Set you password (dont do \"yourName123\" !): ";
+				getline(std::cin, password);
+
+				Node* newPrivtFile = new privateFile(name + ".pvt", currentFolder, password);
+				currentFolder->addNode(newPrivtFile);
+
 				break;
 			}
 			else if (choice == 4) {
@@ -59,7 +79,7 @@ void Commands::executeNew(std::string textName) {
 				std::cout << "Creating Mp3 file...\n";
 				std::string name;
 				std::cout << "Enter the name of the audio file you want to create:  " << std::endl;
-				Node* mp3File = new audioFile(name, currentFolder);
+				Node* mp3File = new audioFile(name + ".mp3", currentFolder);
 				currentFolder->addNode(mp3File);
 				break;
 
@@ -71,7 +91,10 @@ void Commands::executeNew(std::string textName) {
 
 }
 
-void Commands::executeRename(std::string oldName, std::string newName) {
+void Commands::executeRename(std::string oldName) {
+	std::string newName;
+	std::cout << "Enter the new name you want: ";
+	getline(std::cin, newName);
 	currentFolder->renameNode(oldName, newName);
 }
 
@@ -106,5 +129,84 @@ void Commands::executeCd(std::string NodeName) {
 void Commands::executeRm(std::string name) {
 
 	Node* target = currentFolder->findChild(name);
-	target->deleteNode();
+	if (target != nullptr) {
+		target->deleteNode();
+	}
+	else {
+		std::cout << "File not found!" << std::endl;
+	}
+}
+
+void Commands::executeCommandManager(std::string input) {
+
+	std::stringstream ss(input);
+
+	std::string command;
+	std::string nodeName;
+
+	ss >> command;
+	ss >> nodeName;
+
+	if (command == "mkdir") {
+
+		if (nodeName.empty()) {
+			std::cout << "Error: File/folder name missing\n";
+			return;
+		}
+
+		executeMkdir(nodeName);
+		std::cout << "Folder created: " << nodeName << "\n";
+	}
+	else if (command == "Ls") {
+		executeLs();
+	}
+	else if (command == "cd") {
+
+		if (nodeName.empty()) {
+			std::cout << "Error: file/folder name missing\n";
+			return;
+		}
+
+		executeCd(nodeName);
+	}
+	else if (command == "New") {
+		executeNew();
+	}
+	else if (command == "Rm") {
+		if (nodeName.empty()) {
+			std::cout << "Error: file/folder name missing\n";
+			return;
+		}
+		executeRm(nodeName);
+	}
+	else if (command == "Rename") {
+
+		if (nodeName.empty()) {
+			std::cout << "Error: file/folder name missing\n";
+			return;
+		}
+		executeRename(nodeName);
+	}
+	else {
+		std::cout << "Command " << command << " Not found! \n"
+			<< "                   ~~~~~~~\n";
+		return;
+	}
+
+}
+
+
+void Commands::runTerminal() {
+
+	std::cout << "=========== Welcome To File Mangement System ======== \n";
+	std::cout << "                                                      ~made by Abu Saad al-Mashriqi";
+
+	while (true) {
+
+		std::string userInput;
+		std::cout << ">";
+		getline(std::cin, userInput);
+		executeCommandManager(userInput);
+
+	}
 }

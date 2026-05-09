@@ -134,6 +134,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="privateFile.cpp" />
     <ClCompile Include="text.cpp" />
+    <ClCompile Include="ZipFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandManager.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="privateFile.h" />
     <ClInclude Include="text.h" />
+    <ClInclude Include="ZipFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

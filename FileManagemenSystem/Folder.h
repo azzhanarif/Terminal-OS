@@ -12,13 +12,14 @@ protected:
 public:
 
 	Folder(std::string folderName, Node* parentNode);
-	void addNode(Node* newNode); // adding node to childeren
+	void addNode(Node* newNode) override; // adding node to childeren
 	void renameNode(std::string oldName, std::string newName);
 	void open() override;
-	Node* findChild(std::string target);
+	Node* findChild(std::string target) override;
 	bool isFolder() override;
 	virtual void removeChild(Node* childToRemove) override;
 	~Folder() override;
 	void deleteNode() override;
+	void transferAllTo(Folder* destination);
 
 };

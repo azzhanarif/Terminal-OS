@@ -14,6 +14,10 @@ void Node::setName(std::string newName) {
     this->name = newName;
 }
 
+void Node::setParent(Node* newParent) {
+    parent = newParent;
+}
+
 Node::~Node(){
     delete[] parent;
     parent = nullptr;

@@ -1,11 +1,12 @@
 #include <iostream>
 #include"Node.h"
+#include"commandManager.h"
 using namespace std;
 
 int main() {
 
-    // MUFLEH WAS HERE!
+    Commands FileManagementSystem;
+    FileManagementSystem.runTerminal();
 
-    cout << "System architecture connected perfectly" << endl;
     return 0;
 }

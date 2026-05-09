@@ -1,5 +1,6 @@
 #include<iostream>
 #include"Folder.h"
+#include"Node.h"
 
 Folder::Folder(std::string folderName, Node* parentNode) : Node(folderName, parentNode) {
 	maxCapacity = 50;
@@ -78,4 +79,12 @@ Node* Folder::findChild(std::string target) {
 
 bool Folder::isFolder() {
 	return true;
+}
+
+void Folder::transferAllTo(Folder* destination) {
+	for (int i = 0; i < childCount; i++) {
+		destination->addNode(children[i]);
+		children[i]->setParent(destination);
+	}
+	childCount = 0;
 }

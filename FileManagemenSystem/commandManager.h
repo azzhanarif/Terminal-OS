@@ -15,10 +15,13 @@ public:
 
 	void executeLs(); // DONE
 	void executeMkdir(std::string dirName); // DONE
-	void executeRename(std::string oldName, std::string newName); // DONE
-	void executeNew(std::string fileName); // DONE
-	void executeRm(std::string nodeName);
+	void executeRename(std::string oldName); // DONE
+	void executeNew(); // DONE
+	void executeRm(std::string nodeName); // DONE
 	void executeCd(std::string nodeName); // DONE
+	void executeSearch(std::string nodeName); 
+	void runTerminal();
+	void executeCommandManager(std::string input);
 
 };
 
