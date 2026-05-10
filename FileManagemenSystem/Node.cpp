@@ -18,7 +18,19 @@ void Node::setParent(Node* newParent) {
     parent = newParent;
 }
 
-Node::~Node(){
-    delete[] parent;
+Node::~Node() {
     parent = nullptr;
+}
+
+void Node::removeChild(Node* childToRemove) {
+ 
+}
+
+Node* Node::findChild(std::string target) {
+    
+    return nullptr;
+}
+
+void Node::addNode(Node* newNode) {
+
 }

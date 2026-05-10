@@ -9,7 +9,11 @@ Folder::Folder(std::string folderName, Node* parentNode) : Node(folderName, pare
 }
 
 
-void Folder::addNode(Node* ptr) { // used when Mkdir/new
+void Folder::addNode(Node* ptr) { // used when mkdir or new
+	if (childCount >= maxCapacity) {
+		std::cout << "Folder is full!\n";
+		return;
+	}
 	children[childCount] = ptr;
 	childCount++;
 }
@@ -20,11 +24,12 @@ void Folder::open() { // used when ls
 	}
 }
 
-void Folder::deleteNode() { // used when rm
+void Folder::deleteNode() {
 	for (int i = 0; i < childCount; i++) {
 		delete children[i];
+		children[i] = nullptr;
 	}
-	delete[] this;
+	childCount = 0;
 }
 
 void Folder :: removeChild(Node* childToRemove) {
@@ -43,9 +48,13 @@ void Folder :: removeChild(Node* childToRemove) {
 	}
 }
 
-Folder :: ~Folder() {
-	deleteNode();
+Folder::~Folder() {
+	for (int i = 0; i < childCount; i++) {
+		delete children[i];
+		children[i] = nullptr;
+	}
 	delete[] children;
+	children = nullptr;
 }
 
 

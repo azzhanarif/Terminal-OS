@@ -37,6 +37,7 @@ void Commands::executeNew() {
 
 				std:: cout << "Enter the name of the text file: ";
 				std::string name;
+				std::cin.ignore();
 				std::getline(std::cin, name);
 
 				std::cout << "Creating text file...\n";
@@ -51,6 +52,7 @@ void Commands::executeNew() {
 				std::string word;
 
 				std::cout << "Enter the name of the zip file you want to make: ";
+				std::cin.ignore();
 				getline(std::cin, word);
 
 				Node* tempZip = new ZipFile(word + ".zip", currentFolder);
@@ -65,8 +67,10 @@ void Commands::executeNew() {
 				std::string password;
 
 				std::cout << "Enter the name of file you want to create: ";
+				std::cin.ignore();
 				getline(std::cin, name);
 				std::cout << "Set you password (dont do \"yourName123\" !): ";
+				std::cin.ignore();
 				getline(std::cin, password);
 
 				Node* newPrivtFile = new privateFile(name + ".pvt", currentFolder, password);
@@ -75,14 +79,11 @@ void Commands::executeNew() {
 				break;
 			}
 			else if (choice == 4) {
-
-				std::cout << "Creating Mp3 file...\n";
 				std::string name;
-				std::cout << "Enter the name of the audio file you want to create:  " << std::endl;
+				std::cout << "Enter the name of the audio file: ";
+				std::cin.ignore();
+				std::getline(std::cin, name);
 				Node* mp3File = new audioFile(name + ".mp3", currentFolder);
-				currentFolder->addNode(mp3File);
-				break;
-
 			}
 
 		}
@@ -189,9 +190,11 @@ void Commands::executeCommandManager(std::string input) {
 	}
 	else {
 		std::cout << "Command " << command << " Not found! \n"
-			<< "                   ~~~~~~~\n";
+			<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 		return;
 	}
+
+	return;
 
 }
 
@@ -199,7 +202,7 @@ void Commands::executeCommandManager(std::string input) {
 void Commands::runTerminal() {
 
 	std::cout << "=========== Welcome To File Mangement System ======== \n";
-	std::cout << "                                                      ~made by Abu Saad al-Mashriqi";
+	std::cout << "                                                      Bajwa union pvt ltd\n\n\n";
 
 	while (true) {
 

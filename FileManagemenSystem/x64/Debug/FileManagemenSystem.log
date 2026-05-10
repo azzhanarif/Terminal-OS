@@ -1,25 +1,5 @@
-﻿  commandManager.cpp
-  Folder.cpp
-  main.cpp
-  Mp3.cpp
-  Node.cpp
-  privateFile.cpp
+﻿  Mp3.cpp
+  commandManager.cpp
   text.cpp
-  ZipFile.cpp
   Generating Code...
-ZipFile.obj : error LNK2019: unresolved external symbol "public: virtual void __cdecl Node::removeChild(class Node *)" (?removeChild@Node@@UEAAXPEAV1@@Z) referenced in function "public: __cdecl ZipFile::ZipFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class Node *)" (??0ZipFile@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVNode@@@Z)
-Mp3.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::removeChild(class Node *)" (?removeChild@Node@@UEAAXPEAV1@@Z)
-Node.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::removeChild(class Node *)" (?removeChild@Node@@UEAAXPEAV1@@Z)
-privateFile.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::removeChild(class Node *)" (?removeChild@Node@@UEAAXPEAV1@@Z)
-text.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::removeChild(class Node *)" (?removeChild@Node@@UEAAXPEAV1@@Z)
-ZipFile.obj : error LNK2019: unresolved external symbol "public: virtual class Node * __cdecl Node::findChild(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?findChild@Node@@UEAAPEAV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) referenced in function "public: virtual void __cdecl ZipFile::open(void)" (?open@ZipFile@@UEAAXXZ)
-Mp3.obj : error LNK2001: unresolved external symbol "public: virtual class Node * __cdecl Node::findChild(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?findChild@Node@@UEAAPEAV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
-Node.obj : error LNK2001: unresolved external symbol "public: virtual class Node * __cdecl Node::findChild(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?findChild@Node@@UEAAPEAV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
-privateFile.obj : error LNK2001: unresolved external symbol "public: virtual class Node * __cdecl Node::findChild(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?findChild@Node@@UEAAPEAV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
-text.obj : error LNK2001: unresolved external symbol "public: virtual class Node * __cdecl Node::findChild(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?findChild@Node@@UEAAPEAV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
-ZipFile.obj : error LNK2019: unresolved external symbol "public: virtual void __cdecl Node::addNode(class Node *)" (?addNode@Node@@UEAAXPEAV1@@Z) referenced in function "int `public: __cdecl ZipFile::ZipFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class Node *)'::`1'::dtor$2" (?dtor$2@?0???0ZipFile@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVNode@@@Z@4HA)
-Mp3.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::addNode(class Node *)" (?addNode@Node@@UEAAXPEAV1@@Z)
-Node.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::addNode(class Node *)" (?addNode@Node@@UEAAXPEAV1@@Z)
-privateFile.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::addNode(class Node *)" (?addNode@Node@@UEAAXPEAV1@@Z)
-text.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Node::addNode(class Node *)" (?addNode@Node@@UEAAXPEAV1@@Z)
-C:\CS Projects\FileManagemenSystem\x64\Debug\FileManagemenSystem.exe : fatal error LNK1120: 3 unresolved externals
+  FileManagemenSystem.vcxproj -> C:\CS Projects\FileManagemenSystem\x64\Debug\FileManagemenSystem.exe

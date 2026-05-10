@@ -13,14 +13,16 @@ ZipFile::ZipFile(std::string name, Node* parentNode) : Node(name, parentNode) {
 	int i = 0;
 	while (true) {
 		std::string word;
-		std::cout << "Enter name of the No: " << i + 1 << " file you want to enter: ";
+		std::cout << "Enter filename or 'exit' to finish: ";
+		std::cin.ignore();
 		getline(std::cin, word);
 
+		if (word == "done") break; 
 			Node* target = parent->findChild(word);
 			if (target != nullptr) {
 				
 				parent->removeChild(target); // cutting it from the original folder
-				insideZip->addNode(target); // placing inside zip o
+				insideZip->addNode(target); // placing inside zip one
 			}
 
 		

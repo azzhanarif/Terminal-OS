@@ -47,6 +47,7 @@ void textFile::open() {
 		std::cout << "[E] -> edit the current line\n";
 		std::cout << "[C] -> ADD NEW line\n";
 
+		std::cin.ignore();
 		getline(std::cin, command);
 
 		if (command == "w" || command == "W") {
@@ -81,9 +82,9 @@ void textFile::open() {
 
 			std::string temp;
 			std::cout << "Input the new line you want to enter: \n";
+			std::cin.ignore();
 			std::getline(std::cin, temp);
-			for (int i = lineCount + 1; i < cursor + 1; i--) {
-
+			for (int i = lineCount; i > cursor + 1; i--) {
 				lines[i] = lines[i - 1];
 			}
 			lines[cursor + 1] = temp;
