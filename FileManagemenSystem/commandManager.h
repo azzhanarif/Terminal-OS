@@ -22,6 +22,7 @@ public:
 	void executeSearch(std::string nodeName); 
 	void runTerminal();
 	void executeCommandManager(std::string input);
+	bool hasSpace(std::string name);
 
 };
 

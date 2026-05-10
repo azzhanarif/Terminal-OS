@@ -14,10 +14,9 @@ ZipFile::ZipFile(std::string name, Node* parentNode) : Node(name, parentNode) {
 	while (true) {
 		std::string word;
 		std::cout << "Enter filename or 'exit' to finish: ";
-		std::cin.ignore();
 		getline(std::cin, word);
 
-		if (word == "done") break; 
+		if (word == "exit") break; 
 			Node* target = parent->findChild(word);
 			if (target != nullptr) {
 				

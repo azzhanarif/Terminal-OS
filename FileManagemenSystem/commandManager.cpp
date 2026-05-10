@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include"commandManager.h"
 #include"Node.h"
 #include"Folder.h"
@@ -8,11 +9,28 @@
 #include "ZipFile.h"
 #include<sstream>
 
+bool Commands::hasSpace(std::string name) { //helper
+
+	int len = name.length();
+	for (int i = 0; i < len;i++) {
+		if (name[i] == ' ') {
+			return true;
+		}
+	}
+	return false;
+}
+
 Commands::Commands() {
 	rootFolder = new Folder("root", nullptr);
 	currentFolder = rootFolder;
 }
+
 void Commands::executeMkdir(std::string dirName) {
+	
+	if (currentFolder->checkSameName(dirName)) {
+		return;
+	}
+
 	Node* newFolder = new Folder(dirName, currentFolder);
 	currentFolder->addNode(newFolder);
 }
@@ -27,24 +45,44 @@ void Commands::executeNew() {
 
 	int choice;
 	while(true){
-		std::cout << "Enter Your choice: ";
-		std::cin >> choice;
-		if (choice <= 0 || choice >= 5) {
-			std::cout << "Invalid choice!\n Enter Again: ";
+
+		while (true) {
+			std::cout << "Enter Your choice: ";
+			std::cin >> choice;
+
+			if (std::cin.fail() || choice < 1 || choice > 4) {
+				std::cout << "Invalid Input! Enter again\n";
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+			else {
+				break;
+			}
 		}
-		else {
+
 			if (choice == 1) {
 
-				std:: cout << "Enter the name of the text file: ";
+				std::cout << "Creating textFile....." << std::endl;
+
 				std::string name;
+				std::cout << "Enter the name of the text file: ";
 				std::cin.ignore();
 				std::getline(std::cin, name);
 
-				std::cout << "Creating text file...\n";
+				if (hasSpace(name)) {
+					std::cout << "Space is not allowed while naming!" << std::endl;
+					return;
+				}
 
-				Node* newText = new textFile(name + ".txt", currentFolder);
+				std::string fullName = name + ".txt";
+
+				if (currentFolder->checkSameName(fullName)) {
+					return;
+				}
+
+				Node* newText = new textFile(fullName, currentFolder);
 				currentFolder->addNode(newText);
-
+				std::cout << "Text File created with name " << fullName << "\n";
 				break;
 			}
 			else if (choice == 2) {
@@ -54,6 +92,15 @@ void Commands::executeNew() {
 				std::cout << "Enter the name of the zip file you want to make: ";
 				std::cin.ignore();
 				getline(std::cin, word);
+
+				if (hasSpace(word)) {
+					std::cout << "Space is not allowed while naming!" << std::endl;
+					return;
+				}
+
+				if (currentFolder->checkSameName(word + ".zip")) { // same name checker
+					return;
+				}
 
 				Node* tempZip = new ZipFile(word + ".zip", currentFolder);
 				currentFolder->addNode(tempZip);
@@ -69,8 +116,17 @@ void Commands::executeNew() {
 				std::cout << "Enter the name of file you want to create: ";
 				std::cin.ignore();
 				getline(std::cin, name);
+
+				if (hasSpace(name)) {
+					std::cout << "Space is not allowed while naming!" << std::endl;
+					return;
+				}
+
+				if (currentFolder->checkSameName(name + ".pvt")) { // same name checker
+					return;
+				}
+
 				std::cout << "Set you password (dont do \"yourName123\" !): ";
-				std::cin.ignore();
 				getline(std::cin, password);
 
 				Node* newPrivtFile = new privateFile(name + ".pvt", currentFolder, password);
@@ -83,10 +139,24 @@ void Commands::executeNew() {
 				std::cout << "Enter the name of the audio file: ";
 				std::cin.ignore();
 				std::getline(std::cin, name);
+
+				if (hasSpace(name)) {
+					std::cout << "Space is not allowed while naming!" << std::endl;
+					return;
+				}
+
+				if (currentFolder->checkSameName(name + ".mp3")) {
+					return;
+				}
+
+				std::cout << "Creating Mp3 File...\n";
 				Node* mp3File = new audioFile(name + ".mp3", currentFolder);
+				currentFolder->addNode(mp3File);  
+				std::cout << "Mp3 file created!\n";  
+				break;  
 			}
 
-		}
+		
 
 	}
 
@@ -108,6 +178,8 @@ void Commands::executeCd(std::string NodeName) {
 	// root> cd folder will bring user inside folder which means the only chang will be currentFolder
 	if (NodeName == "..") {
 		currentFolder = rootFolder;
+		std::cout << "Bck to root folder \"" << rootFolder->getName() << "\"\n";
+		return;
 	}
 
 	Node* target = currentFolder->findChild(NodeName);
@@ -115,10 +187,15 @@ void Commands::executeCd(std::string NodeName) {
 	if (target != nullptr) {
 
 		if (target->isFolder()) {
+			std::string prevFolder = currentFolder->getName();
 			currentFolder = (Folder*)currentFolder->findChild(NodeName); // for cd folder
+			std::cout << prevFolder << " >";
+
 		}
 		else {
+			std::cout << "Inside <<<<<<<" << NodeName << ">>>>>>>\n";
 			target->open(); // for cd any type of file
+
 		}
 
 	}
@@ -143,10 +220,23 @@ void Commands::executeCommandManager(std::string input) {
 	std::stringstream ss(input);
 
 	std::string command;
-	std::string nodeName;
-
 	ss >> command;
-	ss >> nodeName;
+
+	std::string nodeName;
+	std::getline(ss, nodeName);
+
+	if (!nodeName.empty() && nodeName[0] == ' ') {
+		nodeName = nodeName.substr(1);           // substr(1) means "give me a substring starting from index 1 to the end"
+	}
+
+	if (hasSpace(nodeName)) { // checkks for the same name
+		
+		std::cout << "spaces are not allowed in names! try putting \"_\" instead of space\n";
+		return;
+
+	}
+
+
 
 	if (command == "mkdir") {
 
@@ -201,13 +291,12 @@ void Commands::executeCommandManager(std::string input) {
 
 void Commands::runTerminal() {
 
-	std::cout << "=========== Welcome To File Mangement System ======== \n";
-	std::cout << "                                                      Bajwa union pvt ltd\n\n\n";
+	std::cout << "======================================= Welcome To Azox's Private File Mangement System V 1.0 ================================================== \n";
 
 	while (true) {
 
 		std::string userInput;
-		std::cout << ">";
+		std::cout << currentFolder->getName() << " >";
 		getline(std::cin, userInput);
 		executeCommandManager(userInput);
 

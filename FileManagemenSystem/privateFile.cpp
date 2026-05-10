@@ -8,7 +8,7 @@ privateFile::privateFile(std::string name, Node* parent, std::string pw): Node(n
     lineCount = 0;
     maxLines = 100;
     lines = new std::string[maxLines];
-    std::cout << "Private file created: " << name << ".priv\n";
+    std::cout << "Private file created: " << name;
 }
 
 void privateFile::open()
@@ -19,9 +19,12 @@ void privateFile::open()
 
     if (userInput != passkey) {
         std::cout << "Wrong passkey! Access denied.\n";
+        std::cout << "Passkey is:" << passkey << "\n";
+        std::cout << "user entered:" << userInput << "\n";
+
         return;
     }
-    std::cout << "\n" << name << ".priv\n";
+    std::cout << "\n" << name;
     if (lineCount == 0) {
         std::cout << "(empty file)\n";
     }

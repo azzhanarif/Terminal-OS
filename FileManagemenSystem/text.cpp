@@ -14,88 +14,102 @@ textFile::textFile(std::string name, Node* parentNode): Node(name,parentNode) {
 }
 
 void textFile::open() {
+    std::cout << "============================ " << name << " ============================\n";
+   
 
+    while (true) {
+        system("cls");
 
-	std::cout << "===================================================================================== " << name << " =====================================================================================\n\n\n";
-	std::cin.ignore();
+        std::cout << "============================ " << name << " ============================\n\n";
 
+      
+        if (lineCount == 0) {
+            std::cout << "File is empty! Press C to add data\n";
+        }
+        else {
+            for (int i = 0; i < lineCount; i++) {
+                if (i == cursor) {
+                    std::cout << "-> " << lines[i] << "\n"; 
+                }
+                else {
+                    std::cout << "   " << lines[i] << "\n"; 
+                }
+            }
+        }
 
+        std::cout << "\n===================== COMMANDS ======================\n";
+        std::cout << "[W] Move UP  [S] Move DOWN  [E] Edit line\n";
+        std::cout << "[C] Add line  [Q] Save & Quit\n";
+        std::cout << ">> ";
 
-	while (true) {
+        std::string command;
+        getline(std::cin, command);
 
-		std::string command;
-		std::string newText;
+        if (command == "W" || command == "w") {
+            if (lineCount == 0) {
+                std::cout << "No lines to navigate!\n";
+            }
+            else if (cursor > 0) {
+                cursor--;
+            }
+            else {
+                std::cout << "Already at top!\n";
+            }
+        }
+        else if (command == "S" || command == "s") {
+            if (lineCount == 0) {
+                std::cout << "No lines to navigate!\n";
+            }
+            else if (cursor < lineCount - 1) {
+                cursor++;
+            }
+            else {
+                std::cout << "Already at bottom!\n";
+            }
+        }
+        else if (command == "E" || command == "e") {
+            if (lineCount == 0) {
+                std::cout << "No lines to edit! Press C to add a line first.\n";
+            }
+            else {
+                std::cout << "Edit line " << cursor << ": ";
+                std::string temp;
+                std::getline(std::cin, temp);
+                lines[cursor] = temp;
+            }
+        }
+        else if (command == "C" || command == "c") {
+            if (lineCount >= maxLines) {
+                std::cout << "File is full!\n";
+            }
+            else {
+                std::cout << "Enter new line: ";
+                std::string temp;
+                std::getline(std::cin, temp);
 
-		system("cls");
+                
+                for (int i = lineCount; i > cursor + 1; i--) {
+                    lines[i] = lines[i - 1];
+                }
 
-		for (int i = 0; i < lineCount; i++) {
-			if (i == cursor) {
-				std::cout << "->";
-			}
-			else {
-				std::cout << "  ";
-			}
-
-			std::cout << lines[i];
-
-		}
-
-		std::cout << "===================== COMMANDS FOR TEXT EDITOR ======================\n";
-		std::cout << "[W] -> Move UP the editor\n";
-		std::cout << "[S] -> Move DOWN the editor\n";
-		std::cout << "[Q] -> SAVE AND QUIT the editor\n";
-		std::cout << "[E] -> edit the current line\n";
-		std::cout << "[C] -> ADD NEW line\n";
-
-		std::cin.ignore();
-		getline(std::cin, command);
-
-		if (command == "w" || command == "W") {
-
-			if (cursor != 0) {
-				cursor--;
-			}
-		}
-		else if (command == "S" || command == "s") {
-
-			if (cursor < lineCount - 1) {
-				cursor++;
-			}
-		}
-		else if (command == "E" || command == "e") { // commans to edit the current text line
-			std::cout << "->" << std::endl;
-			std::string temp;
-
-			std::getline(std::cin, temp);
-
-			lines[cursor] = temp;
-
-		}
-		else if (command == "Q" || command == "q") {
-
-			std::cout << "Saving Data....\n";
-			std::cout << "Exiting...\n";
-			break;
-
-		}
-		else if (command == "C" || command == "c") { // adds a new line in middle of lines
-
-			std::string temp;
-			std::cout << "Input the new line you want to enter: \n";
-			std::cin.ignore();
-			std::getline(std::cin, temp);
-			for (int i = lineCount; i > cursor + 1; i--) {
-				lines[i] = lines[i - 1];
-			}
-			lines[cursor + 1] = temp;
-
-			lineCount++;
-			cursor++;
-
-		}
-
-	}
-
+                if (lineCount == 0) {
+                    lines[0] = temp;  
+                }
+                else {
+                    lines[cursor + 1] = temp;
+                    cursor++;
+                }
+                lineCount++;
+            }
+        }
+        else if (command == "Q" || command == "q") {
+            std::cout << "Saving...\nExiting...\n";
+            break;
+        }
+        else {
+            std::cout << "Unknown command!\n";
+        }
+    }
 }
 
 void textFile::deleteNode() {

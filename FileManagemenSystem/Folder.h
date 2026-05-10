@@ -21,5 +21,6 @@ public:
 	~Folder() override;
 	void deleteNode() override;
 	void transferAllTo(Folder* destination);
+	bool checkSameName(std::string name);
 
 };

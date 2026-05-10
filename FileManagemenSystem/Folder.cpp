@@ -97,3 +97,13 @@ void Folder::transferAllTo(Folder* destination) {
 	}
 	childCount = 0;
 }
+
+bool Folder::checkSameName(std::string name) {
+	for (int i = 0; i < childCount; i++) {
+		if (children[i]->getName() == name) {
+			std::cout << "Name: " << name << " already exists ! try something else <3" << std::endl;
+			return true;
+		}
+	}
+	return false;
+}
