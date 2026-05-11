@@ -4,11 +4,13 @@
 #include <cstdlib>
 
 audioFile::audioFile(std::string name, Node* parent) : Node(name, parent) {
-    filePath = "root\\" + name + ".mp3";
+    filePath = "root\\" + name;
+    system("if not exist root mkdir root");
     std::cout << "The recording has started pls speak!\n";
-    std::string recordCmd = "ffmpeg -f dshow -i audio=\"Microphone Array (Intel® Smart Sound Technology for Digital Microphones)\" -t 5 " + filePath;
+    std::string recordCmd = "ffmpeg -f dshow -i audio=\"Microphone Array (IntelÂ® Smart Sound Technology for Digital Microphones)\" -t 5 " + filePath;
     system(recordCmd.c_str());   //System will run My command in CMD from here in c++
-    std::cout << "Recording is completed your File is saved as: " << name << ".mp3\n";
+    // RIGHT - just print name as-is, it already has the extension
+    std::cout << "Recording completed. File saved as: " << name << "\n";
 }
 
 void audioFile::open() {
