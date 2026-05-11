@@ -1,6 +1,7 @@
 #include "privateFile.h"
 #include <iostream>
 #include <string>
+#include<cstdlib>
 
 privateFile::privateFile(std::string name, Node* parent, std::string pw): Node(name, parent)
 {
@@ -10,18 +11,21 @@ privateFile::privateFile(std::string name, Node* parent, std::string pw): Node(n
     lines = new std::string[maxLines];
     std::cout << "Private file created: " << name;
 }
-
+void clearScreen()  //helper to hide the passkey
+{
+    system("cls");
+}
 void privateFile::open()
 {
+    clearScreen();
     std::string userInput;
     std::cout << "Enter passkey: ";
     std::getline(std::cin, userInput);
 
+   
+
     if (userInput != passkey) {
         std::cout << "Wrong passkey! Access denied.\n";
-        std::cout << "Passkey is:" << passkey << "\n";
-        std::cout << "user entered:" << userInput << "\n";
-
         return;
     }
     std::cout << "\n" << name;
