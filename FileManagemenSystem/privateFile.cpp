@@ -73,7 +73,7 @@ void privateFile::deleteNode()
 {
     std::string userInput;
     std::cout << "Enter passkey to delete: ";
-    std::cin.ignore();
+  
     std::getline(std::cin, userInput);
 
     if (userInput != passkey)
@@ -83,11 +83,12 @@ void privateFile::deleteNode()
     }
     std::cout << "Are you sure you want to delete " << name << "? (yes/no): ";
     std::string confirm;
-    std::cin.ignore();
+
     std::getline(std::cin, confirm);
 
     if (confirm == "yes" || confirm == "Yes")
     {
+        std::cout << "Your private file is deleted! " << "\n";
         parent->removeChild(this); // edited by Azhan later
         delete this;
     }
