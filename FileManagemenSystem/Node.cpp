@@ -34,3 +34,10 @@ Node* Node::findChild(std::string target) {
 void Node::addNode(Node* newNode) {
 
 }
+
+std::string Node::getPath() {
+    if (parent == nullptr) {
+        return name; 
+    }
+    return parent->getPath() + "/" + name; // recursion
+}
