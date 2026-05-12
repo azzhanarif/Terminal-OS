@@ -21,7 +21,17 @@ void audioFile::open() {
 
 void audioFile::deleteNode() {
     std::string deleteCmd = "del " + filePath;   //Here del is like CMD ccommand to permenant delete
-    system(deleteCmd.c_str());
+    std::cout << "Are You sure you want to Delete ?(Yes/No)" << "\n";
+    std::string choice;
+    std::cin >> choice;
+    if (choice == "Yes" || "yes" || "Y" || "y")
+        system(deleteCmd.c_str());
+    else
+    {
+        std::cout << "Audio file not deleted :)" << "\n";
+        return;
+    }
+
     std::cout << name << " deleted.\n";
 }
  
