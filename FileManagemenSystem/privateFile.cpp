@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include<cstdlib>
+#include <filesystem>
+#include <fstream>
+namespace fs = std::filesystem;
 
 privateFile::privateFile(std::string name, Node* parent, std::string pw): Node(name, parent)
 {
@@ -9,7 +12,16 @@ privateFile::privateFile(std::string name, Node* parent, std::string pw): Node(n
     lineCount = 0;
     maxLines = 100;
     lines = new std::string[maxLines];
+
+    std::string path = this->getPath();           
+    if (!fs::exists(path)) {
+        std::ofstream file(path);
+        file.close();
+    }
+
+
     std::cout << "Private file created: " << name;
+
 }
 void clearScreen()  //helper to hide the passkey
 {
@@ -64,6 +76,14 @@ void privateFile::open()
         }
         else if (cmd == 'q') {
             editing = false;
+            std::cout << "Saving private file to disk...\n";
+
+            std::ofstream outFile(this->getPath());             
+            for (int i = 0; i < lineCount; i++) {
+                outFile << lines[i] << "\n";
+            }
+            outFile.close();
+
             std::cout << "File closed.\n";
         }
     }
@@ -73,7 +93,7 @@ void privateFile::deleteNode()
 {
     std::string userInput;
     std::cout << "Enter passkey to delete: ";
-  
+    std::cin.ignore();
     std::getline(std::cin, userInput);
 
     if (userInput != passkey)
@@ -83,12 +103,14 @@ void privateFile::deleteNode()
     }
     std::cout << "Are you sure you want to delete " << name << "? (yes/no): ";
     std::string confirm;
-
+    std::cin.ignore();
     std::getline(std::cin, confirm);
 
     if (confirm == "yes" || confirm == "Yes")
     {
-        std::cout << "Your private file is deleted! " << "\n";
+
+        std::filesystem::remove(this->getPath());           
+   
         parent->removeChild(this); // edited by Azhan later
         delete this;
     }
@@ -107,3 +129,4 @@ privateFile::~privateFile() {
         lines = nullptr;
     }
 }
+
