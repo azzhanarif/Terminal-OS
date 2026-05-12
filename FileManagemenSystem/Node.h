@@ -20,5 +20,6 @@ public:
 	virtual Node* findChild(std::string target);
 	virtual void addNode(Node* newNode);
 	void setParent(Node* newParent);
+	virtual std::string getPath();
 
 };
