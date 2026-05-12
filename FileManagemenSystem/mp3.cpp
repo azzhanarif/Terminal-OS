@@ -3,36 +3,45 @@
 #include <string>
 #include <cstdlib>
 
+#include "mp3.h"
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
 audioFile::audioFile(std::string name, Node* parent) : Node(name, parent) {
-    filePath = "root\\" + name;
-    system("if not exist root mkdir root");
+    // YE CHAECK KARLAY PAIR IMPORTANT HAI 
+    filePath = this->getPath(); 
+    
     std::cout << "The recording has started pls speak!\n";
-    std::string recordCmd = "ffmpeg -f dshow -i audio=\"Microphone Array (Intel® Smart Sound Technology for Digital Microphones)\" -t 5 " + filePath;
-    system(recordCmd.c_str());   //System will run My command in CMD from here in c++
-    // RIGHT - just print name as-is, it already has the extension
-    std::cout << "Recording completed. File saved as: " << name << "\n";
+    
+    // Wrapped filePath in quotes just in case, Windows command line prefers it
+    std::string recordCmd = "ffmpeg -f dshow -i audio=\"Microphone Array (Intel® Smart Sound Technology for Digital Microphones)\" -t 5 \"" + filePath + "\"";
+    system(recordCmd.c_str());   
+    
+    std::cout << "Recording is completed your File is saved as: " << name << "\n";
 }
 
 void audioFile::open() {
     std::cout << "Playing: " << name << "\n";
-    std::string playCmd = "start " + filePath;
+    // Added empty quotes "" to prevent Windows 'start' bugs
+    std::string playCmd = "start \"\" \"" + filePath + "\"";
     system(playCmd.c_str());
 }
 
 void audioFile::deleteNode() {
-    std::string deleteCmd = "del " + filePath;   //Here del is like CMD ccommand to permenant delete
-    std::cout << "Are You sure you want to Delete ?(Yes/No)" << "\n";
-    std::string choice;
-    std::cin >> choice;
-    if (choice == "Yes" || "yes" || "Y" || "y")
-        system(deleteCmd.c_str());
-    else
-    {
-        std::cout << "Audio file not deleted :)" << "\n";
-        return;
+    // 1. Delete the physical file from the hard drive via CMD
+    std::string deleteCmd = "del \"" + filePath + "\"";
+    system(deleteCmd.c_str());
+
+    // 2. Remove the node from your C++ memory tree
+    if (parent != nullptr) {
+        parent->removeChild(this);
     }
 
     std::cout << name << " deleted.\n";
+
+    // 3. Free the memory
+    delete this;
 }
  
 bool audioFile::isFolder() {  //its a audio file thus terminates node here
@@ -41,3 +50,4 @@ bool audioFile::isFolder() {  //its a audio file thus terminates node here
 
 audioFile::~audioFile() { //already handled in deleteNodec
 }
+
